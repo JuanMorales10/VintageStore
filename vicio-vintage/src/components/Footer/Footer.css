@@ -1,0 +1,48 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #b9dfec;
+    color: #fff;
+  }
+  
+  .footer-left,
+  .footer-right {
+    flex: 1; /* Ocupan cada uno el 50% del espacio disponible */
+  }
+  
+  .footer-logo {
+    max-width: 150px; /* Ajusta el tamaño del logo según necesites */
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center; /* Centra los iconos de redes sociales */
+  }
+  
+  .social-icons a {
+    color: #fff;
+    margin: 0 10px; /* Espacio entre iconos */
+    font-size: 24px; /* Tamaño de los iconos */
+  }
+  
+  .social-icons a:hover {
+    color: #ff5e14; /* Cambio de color al pasar el mouse */
+  }
+  
+  /* Estilos responsivos para pantallas pequeñas */
+  @media (max-width: 600px) {
+    .footer {
+      flex-direction: column;
+    }
+  
+    .footer-left,
+    .footer-right {
+      flex: none;
+      width: 100%; /* Cada sección toma el ancho completo */
+      text-align: center; /* Centrado del contenido en dispositivos móviles */
+      margin-bottom: 20px; /* Espacio entre las secciones */
+    }
+  }
+  

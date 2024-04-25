@@ -1,0 +1,73 @@
+/* Estilos para la barra de navegación */
+.navbar {
+    background-color: #b9dfec; /* Ajusta según tu diseño */
+    padding: 10px 20px; /* Ajusta el espaciado según necesites */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para la barra de navegación */
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+}
+
+.hamburger-lines {
+    display: none; /* Oculta por defecto, se muestra en pantallas pequeñas */
+}
+
+.hamburger-lines .line {
+    width: 30px;
+    height: 3px;
+    background-color: black;
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.menu-items {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-items li {
+    padding: 0 15px; /* Espaciado entre elementos del menú */
+}
+
+.menu-items li a {
+    text-decoration: none;
+    color: #333; /* Color del texto del enlace */
+    font-weight: 500;
+}
+
+.menu-items li a:hover {
+    color: #000; /* Cambio de color al pasar el ratón */
+}
+
+.logo {
+    height: 50px; 
+    position: relative;
+    ;
+}
+
+.logo img {
+    height: auto;
+    width: 168px;
+    position: relative;
+bottom: 58px;
+left: 50px;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    .hamburger-lines {
+        display: block;
+    }
+
+    .menu-items {
+        display: none; /* Oculta los elementos del menú en dispositivos móviles */
+    }
+
+    /* Más estilos responsivos según necesites */
+}

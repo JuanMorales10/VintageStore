@@ -1,0 +1,57 @@
+/* Estilos para el banner principal */
+#home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+
+.home_page {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.home_img img {
+    width: 100%;
+    height: auto;
+}
+
+.home_txt {
+    position: absolute;
+    right: 5%;
+    color: #fff;
+    text-align: left;
+    background-color: #fff3;
+    border-radius: 10px;
+    padding: 15px;
+    top: 200px;
+}
+
+.home_txt .collectio {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.home_txt h2 {
+    font-size: 32px;
+}
+
+.home_label p {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.home_txt button {
+    margin-top: 20px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.home_txt button:hover {
+    background-color: #0056b3;
+}

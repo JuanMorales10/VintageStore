@@ -1,0 +1,76 @@
+/* Estilos para la lista de productos, similar al CSS que ya has definido
+.seller {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.best-seller {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.best-p1 {
+    width: 250px;
+    margin: 15px;
+    position: relative;
+}
+
+.best-p1 img {
+    width: 100%;
+    height: auto;
+}
+
+.card{
+    margin: 10px;
+}
+
+.best-p1-txt {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border-radius: 5px;
+}
+
+.name-of-p p, .rating, .price {
+    margin: 5px 0;
+}
+
+.buy-now button {
+    width: 100%;
+    padding: 10px;
+    background-color: #dca3ffe0;
+    border: none;
+    color: #fff;
+}
+
+button a{
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.buy-now button:hover {
+    background-color: #0056b3;
+} */
+
+.product-list {
+    padding: 20px;
+    margin: auto;
+    max-width: 1200px;  
+}
+
+.carousel-container {
+    padding: 20px 0; /* Ajusta el padding si es necesario */
+}
+
+.custom-dot-list-style {
+    text-align: center;  
+}
+
+.carousel-item-padding-40-px {
+    padding-right: 10px; /* Reduce el espacio entre tarjetas si es necesario */
+}
+

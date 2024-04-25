@@ -1,0 +1,35 @@
+/* Estilos para el anuncio superior y enlaces de inicio de sesión/registro */
+.top-txt {
+    background-color: #f8f9fa1a;
+    padding: 10px 0;
+    font-size: 14px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    width: 100vw;
+}
+
+.head.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 15px; /* Espaciado interno */
+}
+
+.head-txt p {
+    margin: 0; /* Elimina márgenes por defecto */
+    color: #333; /* Color del texto del anuncio */
+}
+
+.sing_in_up a {
+    text-decoration: none;
+    margin-left: 10px;
+    color: #020202; /* Color para enlaces de inicio de sesión/registro */
+    font-weight: 500;
+}
+
+.sing_in_up a:hover {
+    text-decoration: underline; /* Subraya al pasar el ratón */
+}

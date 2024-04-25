@@ -1,0 +1,51 @@
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    width: 200px; /* Ajusta según la configuración del carrusel */
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    flex-direction: column; /* Organiza la imagen y el cuerpo del card en columna */
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px; /* Ajusta la altura de la imagen */
+    object-fit: cover; /* Asegura que la imagen cubra el espacio designado sin distorsión */
+}
+
+.card-body {
+    padding: 10px;
+    text-align: center;
+    flex-grow: 1; /* Permite que el cuerpo crezca para llenar el espacio disponible */
+}
+
+.card-title {
+    font-size: 16px; /* Reduce el tamaño del título para espacios más pequeños */
+    color: #333;
+}
+
+.card-price {
+    font-size: 14px; /* Reduce el tamaño del precio */
+    color: #666;
+    margin: 5px 0;
+}
+
+.card-button {
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 8px 16px; /* Reduce el padding del botón */
+    display: inline-block;
+    border-radius: 5px;
+    margin-top: auto; /* Alinea el botón hacia abajo */
+}
+
+.card-button:hover {
+    background-color: #0056b3;
+}
