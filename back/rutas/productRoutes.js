@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controller/productCont');
+const ProductImages = require('../middleware/ProcessProductImages')
 
 // Listar todos los productos
 router.get('/', productController.getAllProducts);
@@ -9,10 +10,10 @@ router.get('/', productController.getAllProducts);
 router.get('/:id', productController.getProductById);
 
 // Crear un producto
-router.post('/', productController.createProduct);
+router.post('/', ProductImages.array('imagen') ,productController.createProduct);
 
 // Actualizar un producto
-router.put('/:id', productController.updateProduct);
+router.put('/:id', ProductImages.array('imagen'), productController.updateProduct);
 
 // Eliminar un producto
 router.delete('/:id', productController.deleteProduct);

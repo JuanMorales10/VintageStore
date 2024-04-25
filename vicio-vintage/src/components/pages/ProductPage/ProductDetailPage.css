@@ -1,0 +1,153 @@
+/* .product-detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    gap: 20px;
+}
+
+.carousel-image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+}
+
+.product-detail-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.product-title {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.product-location {
+    font-size: 1em;
+    color: #666;
+}
+
+.product-description {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.product-price {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.product-meta {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.product-meta li {
+    margin-bottom: 5px;
+}
+
+.add-to-basket-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+.add-to-basket-button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .product-detail-container {
+        flex-direction: column;
+    }
+} */
+
+
+.product-detail-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .carousel-container {
+    flex: 1;
+    width: 400px;
+  }
+  
+  .product-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .product-detail-content {
+    flex: 1 1;
+    padding: 30px;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 44px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); 
+}
+
+  
+  .product-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: "Caveat", cursive;
+    font-optical-sizing: auto;
+  }
+  
+  .product-price {
+    font-size: 20px;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .product-description {
+    margin-bottom: 20px;
+  }
+  
+  .product-meta {
+    margin-bottom: 20px;
+  }
+  
+  .add-to-basket-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .add-to-basket-button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .product-detail-page {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  

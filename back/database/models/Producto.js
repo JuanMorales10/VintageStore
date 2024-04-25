@@ -28,6 +28,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         imagen: {
             type: DataTypes.STRING
+        },
+        talla: {
+            type: DataTypes.STRING
         }
     };
     const config = {
