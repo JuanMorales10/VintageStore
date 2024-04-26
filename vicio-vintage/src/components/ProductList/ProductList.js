@@ -68,7 +68,7 @@ const ProductList = ({ title, products }) => {
 
   return (
     <section className="product-list">
-      <h2>{title}</h2>
+      <h2 className='tit'>Ultimas Prendas</h2>
       <Carousel
         responsive={responsive}
         infinite={true}

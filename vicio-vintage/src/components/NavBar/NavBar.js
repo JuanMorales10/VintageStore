@@ -18,11 +18,10 @@ const NavBar = () => {
           <span className="line line3"></span>
         </div>
         <ul className="menu-items">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#sellers">Shop</a></li>
-          <li><a href="#news">Blog</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a></a></li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/coleccion">Colección</Link></li> 
+          <li><Link to="/blog">Blog</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
         </ul>
       </div>
     </nav>
@@ -30,3 +29,5 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
+

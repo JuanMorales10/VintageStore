@@ -1,14 +1,20 @@
 const db = require('../database/models'); // Asumiendo que usas Sequelize y tienes tus modelos configurados
 
 const categoryController = {
-    getAllCategories: async (req, res) => {
-        try {
-            const categories = await db.Categoria.findAll();
-            res.send(categories);
-        } catch (error) {
-            res.status(500).send(error);
+  getAllCategorias: async (req, res) => {
+    try {
+      // Obtenemos solo las categorías que no tienen una 'categoriaPadreId'
+      const categorias = await db.Categoria.findAll({
+        where: {
+          categoriaPadreId: null // Suponiendo que 'null' indica categorías principales
         }
-    },
+      });
+      res.json(categorias);
+    } catch (error) {
+      console.error('Error al obtener categorías:', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    }
+  },
 
     createCategory: async (req, res) => {
         try {

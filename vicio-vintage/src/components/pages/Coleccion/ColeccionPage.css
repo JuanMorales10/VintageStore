@@ -1,0 +1,74 @@
+.coleccion-page {
+  padding: 0 2rem;
+  background-color: #efeeee; /* Color de fondo de la página */
+}
+
+.coleccion-page h1 {
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: #333; /* Color del título del catálogo */
+  text-transform: uppercase;
+  padding: 20px 0;
+}
+
+.categorias-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center; /* Centra los elementos de la categoría */
+}
+
+.categoria-card {
+  width: calc(33.333% - 1rem); /* Tres elementos por fila con un espacio de 1rem */
+  margin-bottom: 2rem; /* Espacio debajo de cada tarjeta */
+  overflow: hidden; /* Asegura que la imagen no se desborde del contenedor */
+  border-radius: 0.5rem; /* Bordes redondeados para las tarjetas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para la profundidad */
+  transition: transform 0.3s ease;
+  position: relative;
+  cursor: pointer;
+  background: #f8f8f8; /* Fondo de las tarjetas */
+  height: 300px; /* Altura fija para todas las tarjetas */
+}
+
+.categoria-card:hover {
+  transform: translateY(-10px); /* Eleva la tarjeta al pasar el cursor */
+}
+
+.categoria-imagen {
+  height: 100%; /* Asegura que el contenedor de imagen toma la altura total de la tarjeta */
+  overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde */
+}
+
+.categoria-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cubre el área del contenedor sin perder la proporción */
+  display: block;
+}
+
+.categoria-card h2 {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #fff; /* Color de texto */
+  background: rgba(0, 0, 0, 0.6); /* Fondo oscuro semi-transparente para mejorar la legibilidad */
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem; /* Bordes redondeados para el texto */
+}
+
+/* Media queries para responsividad */
+@media (max-width: 1024px) {
+  .categoria-card {
+    width: calc(50% - 1rem); /* Dos por fila en pantallas medianas */
+  }
+}
+
+@media (max-width: 768px) {
+  .categoria-card {
+    width: 100%; /* Una sola columna en pantallas pequeñas */
+  }
+}

@@ -5,6 +5,9 @@ const ProductImages = require('../middleware/ProcessProductImages')
 
 // Listar todos los productos
 router.get('/', productController.getAllProducts);
+// Listar productos por categoría
+router.get('/categoria/:categoriaId', productController.getProductsByCategory);
+
 
 // Detalle de un producto
 router.get('/:id', productController.getProductById);

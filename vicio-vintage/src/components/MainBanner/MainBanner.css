@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 8px;
+    position: relative;
 }
 
 .home_page {
@@ -15,6 +15,25 @@
 .home_img img {
     width: 100%;
     height: auto;
+    min-height: 500px;
+    object-fit: cover;
+}
+
+.but{
+    text-decoration: none;
+    color: #fff;
+    background-color: #0000006f;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.but:hover{
+    text-decoration: none;
+    color: #000000;
+    background-color: #ffffffd3;
+    padding: 10px;
+    border-radius: 5px;
+    transition:  1s ease;
 }
 
 .home_txt {
@@ -25,12 +44,16 @@
     background-color: #fff3;
     border-radius: 10px;
     padding: 15px;
-    top: 98px;
+    top: 140px;
 }
 
-.home_txt .collectio {
-    font-size: 24px;
+.collectio {
+    font-size: 50px;
     font-weight: bold;
+    position: absolute;
+    top: -28px;
+    color: #FFF;
+    left: 41vw;
 }
 
 .home_txt h2 {
@@ -38,7 +61,7 @@
 }
 
 .home_label p {
-    margin-top: 20px;
+    margin-top: 50px;
     font-size: 16px;
 }
 

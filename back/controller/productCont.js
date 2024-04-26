@@ -9,6 +9,40 @@ const productController = {
             res.status(500).send(error);
         }
     },
+    
+    getProductsByCategory: async (req, res) => {
+        try {
+            const categoriaId = req.params.categoriaId;
+            const categoria = await db.Categoria.findByPk(categoriaId, {
+                include: [{
+                    model: db.Categoria,
+                    as: 'subcategorias',
+                    include: [{
+                        model: db.Producto,
+                        as: 'productos'
+                    }]
+                }]
+            });
+
+            let productos = [];
+            if (categoria) {
+                // Añadir productos de la categoría principal
+                const productosPrincipales = await db.Producto.findAll({
+                    where: { id_categoria: categoriaId }
+                });
+                productos = productos.concat(productosPrincipales);
+
+                // Añadir productos de las subcategorías
+                categoria.subcategorias.forEach(subcategoria => {
+                    productos = productos.concat(subcategoria.productos);
+                });
+            }
+            res.json(productos);
+        } catch (error) {
+            console.error('Error al obtener productos por categoría:', error);
+            res.status(500).send(error);
+        }
+    },
 
     getProductById: async (req, res) => {
         try {

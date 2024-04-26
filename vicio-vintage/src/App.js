@@ -8,6 +8,7 @@ import Footer from './components/Footer/Footer';
 import ProductDetailPage from './components/pages/ProductPage/ProductDetailPage'; // Asegúrate de que el import es correcto
 import ProductForm from './components/pages/CreateForm/ProductForm';
 import EditProductForm from './components/pages/EditForm/EditProductForm';
+import ColeccionPage from './components/pages/Coleccion/ColeccionPage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           {/* <Route path='/' element={<ProductForm />} /> */}
           <Route path='/' element={<Home />} />
+          <Route path="/coleccion" element={<ColeccionPage />} />
           <Route path="/products/:productId" element={<ProductDetailPage />} />
           <Route path='/products/edit/:productId?' element={<EditProductForm />} />
           <Route path="*" element={<NotFound />} />

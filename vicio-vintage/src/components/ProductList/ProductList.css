@@ -59,7 +59,13 @@ button a{
 .product-list {
     padding: 20px;
     margin: auto;
-    max-width: 1200px;  
+}
+
+.tit{
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel-container {

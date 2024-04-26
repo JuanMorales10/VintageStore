@@ -57,8 +57,40 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import './ProductDetailPage.css';
 import ropa from '../../../assets/ropa.jpg'; // Asegúrate de que la ruta es correcta
+import ProductList from '../../ProductList/ProductList';
 
 const ProductDetailPage = () => {
+
+  const topProducts = [
+    {
+      id: 1,
+      image: ropa ,
+      name: 'Producto 1',
+      price: '29.99',
+      link: '/buy/product1'
+    },
+    {
+        id: 2,
+        image: ropa ,
+        name: 'Producto 2',
+        price: '29.99',
+        link: '/buy/product1'
+      },
+      {
+        id: 2,
+        image: ropa ,
+        name: 'Producto 2',
+        price: '29.99',
+        link: '/buy/product1'
+      },
+      {
+        id: 2,
+        image: ropa ,
+        name: 'Producto 2',
+        price: '29.99',
+        link: '/buy/product1'
+      },    // más productos...
+  ];
   const product = {
     name: "Colorful Retro",
     description: "Vintage white t-shirt available. Authentic piece with a retro vibe. Grab it now!",
@@ -76,8 +108,9 @@ const ProductDetailPage = () => {
   };
 
   return (
+    <>
     <div className="product-detail-page">
-      <div className="carousel-container">
+      <div className="carousel-containerrr">
         <Carousel responsive={responsive} infinite={true} showDots={false} autoPlay={true} autoPlaySpeed={7000}>
           {product.images.map((image, index) => (
             <img key={index} src={image} alt={product.name} className="product-image" />
@@ -96,6 +129,8 @@ const ProductDetailPage = () => {
         <button className="add-to-basket-button">Add to Basket</button>
       </div>
     </div>
+      <ProductList  products={topProducts} /> 
+            </>
   );
 };
 

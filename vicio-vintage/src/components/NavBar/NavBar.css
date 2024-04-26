@@ -1,6 +1,6 @@
 /* Estilos para la barra de navegación */
 .navbar {
-    background-color: #b9dfec; /* Ajusta según tu diseño */
+    background-color: #7ac3b0; /* Ajusta según tu diseño */
     padding: 10px 20px; /* Ajusta el espaciado según necesites */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para la barra de navegación */
 }
@@ -10,6 +10,8 @@
     justify-content: space-between;
     align-items: center;
     height: 100px;
+    position: relative;
+    z-index: 10;
 }
 
 .hamburger-lines {
@@ -29,6 +31,7 @@
     display: flex;
     margin: 0;
     padding: 0;
+    margin-right: 30px;
 }
 
 .menu-items li {
@@ -37,7 +40,7 @@
 
 .menu-items li a {
     text-decoration: none;
-    color: #333; /* Color del texto del enlace */
+    color: #fff9f9; /* Color del texto del enlace */
     font-weight: 500;
 }
 
@@ -58,6 +61,8 @@
 bottom: 58px;
 left: 50px;
 }
+
+
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
