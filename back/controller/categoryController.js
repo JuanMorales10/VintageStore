@@ -3,11 +3,8 @@ const db = require('../database/models'); // Asumiendo que usas Sequelize y tien
 const categoryController = {
   getAllCategorias: async (req, res) => {
     try {
-      // Obtenemos solo las categorías que no tienen una 'categoriaPadreId'
       const categorias = await db.Categoria.findAll({
-        where: {
-          categoriaPadreId: null // Suponiendo que 'null' indica categorías principales
-        }
+        where: { categoriaPadreId: null }
       });
       res.json(categorias);
     } catch (error) {
@@ -16,14 +13,31 @@ const categoryController = {
     }
   },
 
-    createCategory: async (req, res) => {
-        try {
-            const category = await db.Categoria.create(req.body);
-            res.status(201).send(category);
-        } catch (error) {
-            res.status(400).send(error);
-        }
+  getSubcategorias: async (req, res) => {
+    const { id_categoria } = req.params;
+    try {
+      const subcategorias = await db.Categoria.findAll({
+        where: { categoriaPadreId: id_categoria }
+      });
+      if (subcategorias.length > 0) {
+        res.status(200).json(subcategorias);
+      } else {
+        res.status(404).json({ message: 'No subcategories found' });
+      }
+    } catch (error) {
+      console.error('Error fetching subcategories:', error);
+      res.status(500).json({ error: 'Internal server error' });
     }
+  },
+
+  createCategory: async (req, res) => {
+    try {
+      const category = await db.Categoria.create(req.body);
+      res.status(201).send(category);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  }
 };
 
 module.exports = categoryController;

@@ -1,98 +1,184 @@
-const db = require('../database/models'); // Asumiendo que usas Sequelize y tienes tus modelos configurados
+const db = require('../database/models');
+const { validationResult } = require('express-validator');
 
 const productController = {
     getAllProducts: async (req, res) => {
         try {
-            const products = await db.Producto.findAll();
-            res.send(products);
-        } catch (error) {
-            res.status(500).send(error);
-        }
-    },
-    
-    getProductsByCategory: async (req, res) => {
-        try {
-            const categoriaId = req.params.categoriaId;
-            const categoria = await db.Categoria.findByPk(categoriaId, {
-                include: [{
-                    model: db.Categoria,
-                    as: 'subcategorias',
-                    include: [{
-                        model: db.Producto,
-                        as: 'productos'
-                    }]
-                }]
+            const products = await db.Producto.findAll({
+                include: [
+                    { model: db.Categoria, as: 'categoria' },
+                    { model: db.ProductImage, as: 'imagenes' }
+                ]
             });
-
-            let productos = [];
-            if (categoria) {
-                // Añadir productos de la categoría principal
-                const productosPrincipales = await db.Producto.findAll({
-                    where: { id_categoria: categoriaId }
-                });
-                productos = productos.concat(productosPrincipales);
-
-                // Añadir productos de las subcategorías
-                categoria.subcategorias.forEach(subcategoria => {
-                    productos = productos.concat(subcategoria.productos);
-                });
-            }
-            res.json(productos);
+            res.json(products);
         } catch (error) {
-            console.error('Error al obtener productos por categoría:', error);
-            res.status(500).send(error);
+            console.error('Error al obtener los productos:', error);
+            res.status(500).json({ error: 'Error interno del servidor' });
         }
     },
 
     getProductById: async (req, res) => {
         try {
-            const product = await db.Producto.findByPk(req.params.id);
-            if (product) {
-                res.send(product);
-            } else {
-                res.status(404).send({ message: 'Product not found' });
+            const product = await db.Producto.findByPk(req.params.id, {
+                include: [
+                    { model: db.Categoria, as: 'categoria' },
+                    { model: db.ProductImage, as: 'imagenes' }
+                ]
+            });
+            if (!product) {
+                return res.status(404).json({ message: 'Product not found' });
             }
+            res.json(product);
         } catch (error) {
-            res.status(500).send(error);
+            console.error('Error al obtener el producto:', error);
+            res.status(500).json({ error: 'Error interno del servidor' });
         }
     },
+    getProductsByCategory : async (req, res) => {
+        const { categoriaId } = req.params;
+        try {
+            const categoria = await db.Categoria.findByPk(categoriaId, {
+                include: [{
+                    model: db.Categoria,
+                    as: 'subcategorias',
+                    attributes: ['id_categoria', 'nombre', 'descripcion'] // Asegúrate de que estos campos existen en tu modelo
+                }]
+            });
+    
+            if (!categoria) {
+                return res.status(404).json({ message: 'Category not found' });
+            }
+    
+            const products = await db.Producto.findAll({
+                where: { id_categoria: categoriaId },
+                include: [
+                    { model: db.ProductImage, as: 'imagenes' }
+                ]
+            });
+    
+            if (products.length === 0) {
+                return res.status(404).json({ message: 'No products found for this category' });
+            }
+    
+            const productsWithImages = products.map(product => ({
+                id: product.id_producto,
+                name: product.nombre,
+                description: product.descripcion,
+                price: product.precio,
+                stock: product.stock,
+                size: product.talla,
+                images: product.imagenes.map(image => image.url) // Asegura que 'url' sea el campo correcto en tu modelo ProductImage
+            }));
+    
+            res.json({
+                categoryName: categoria.nombre,
+                subcategories: categoria.subcategorias,
+                products: productsWithImages
+            });
+        } catch (error) {
+            console.error('Error al obtener productos por categoría:', error);
+            res.status(500).json({ error: 'Error interno del servidor' });
+        }
+    }    
+    ,
 
     createProduct: async (req, res) => {
+
+        // Extraer datos del cuerpo de la solicitud
+        const { nombre, descripcion, precio, id_categoria, id_subcategoria, stock, talla } = req.body;
+        
+        // Crear un objeto con la data del producto
+        const productData = {
+            nombre,
+            descripcion,
+            precio,
+            id_categoria,
+            stock,
+            talla,
+            id_subcategoria: id_subcategoria || null // Si no hay subcategoria, establecer como null
+        };
+
+        console.log(productData)
+    
         try {
-            const product = await db.Producto.create(req.body);
-            res.status(201).send(product);
+            // Validar que la categoría exista
+            const categoria = await db.Categoria.findByPk(id_categoria);
+            if (!categoria) {
+                return res.status(400).json({ message: 'Categoría no encontrada' });
+            }
+    
+            // Si se proporciona una subcategoría, validar que exista
+            if (id_subcategoria) {
+                const subcategoria = await db.Categoria.findByPk(id_subcategoria);
+                if (!subcategoria || subcategoria.categoriaPadreId !== parseInt(id_categoria)) {
+                    return res.status(400).json({ message: 'Subcategoría no encontrada o no coincide con la categoría' });
+                }
+            }
+    
+            // Crear producto con el objeto 'productData'
+            const product = await db.Producto.create(productData);
+    
+            // Procesar múltiples imágenes si las hay
+            if (req.files && req.files.length > 0) {
+                const imagePromises = req.files.map(file => {
+                    return db.ProductImage.create({
+                        productId: product.id_producto,
+                        url: file.filename // Asegúrate de que la URL sea accesible al cliente
+                    });
+                });
+    
+               // Esperar a que todas las imágenes se procesen
+                await Promise.all(imagePromises);
+            }
+    
+            // Si todo sale bien, enviar respuesta
+            res.status(201).json({ message: 'Producto creado con éxito', product });
         } catch (error) {
-            res.status(400).send(error);
+            // Si algo sale mal, enviar error
+            console.error('Error al crear el producto:', error);
+            res.status(500).json({ error: 'Error interno del servidor', details: error.message });
         }
     },
-
+    
     updateProduct: async (req, res) => {
         try {
             const product = await db.Producto.findByPk(req.params.id);
-            if (product) {
-                await product.update(req.body);
-                res.send({ message: 'Product updated', product });
-            } else {
-                res.status(404).send({ message: 'Product not found' });
+            if (!product) {
+                return res.status(404).json({ message: 'Product not found' });
             }
+
+            const { nombre, descripcion, precio, id_categoria, stock, talla } = req.body;
+            await product.update({
+                nombre,
+                descripcion,
+                precio,
+                id_categoria,
+                stock,
+                talla
+            });
+
+            res.json({ message: 'Producto actualizado con éxito', product });
         } catch (error) {
-            res.status(500).send(error);
+            console.error('Error al actualizar el producto:', error);
+            res.status(500).json({ error: 'Error interno del servidor' });
         }
     },
 
     deleteProduct: async (req, res) => {
         try {
             const product = await db.Producto.findByPk(req.params.id);
-            if (product) {
-                await product.destroy();
-                res.send({ message: 'Product deleted' });
-            } else {
-                res.status(404).send({ message: 'Product not found' });
+            if (!product) {
+                return res.status(404).json({ message: 'Product not found' });
             }
+
+            await product.destroy();
+            res.json({ message: 'Producto eliminado con éxito' });
         } catch (error) {
-            res.status(500).send(error);
+            console.error('Error al eliminar el producto:', error);
+            res.status(500).json({ error: 'Error interno del servidor' });
         }
     }
 };
 
 module.exports = productController;
+

@@ -22,12 +22,17 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        id_subcategoria: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'Categoria',
+                key: 'id_categoria'
+            }
+        },
         stock: {
             type: DataTypes.INTEGER,
             defaultValue: 0
-        },
-        imagen: {
-            type: DataTypes.STRING
         },
         talla: {
             type: DataTypes.STRING
@@ -44,6 +49,14 @@ module.exports = (sequelize, DataTypes) => {
         Producto.belongsTo(models.Categoria, {
             foreignKey: 'id_categoria',
             as: 'categoria'
+        });
+        Producto.belongsTo(models.Categoria, {
+            foreignKey: 'id_subcategoria',
+            as: 'subcategoria'
+        });
+        Producto.hasMany(models.ProductImage, {
+            foreignKey: 'productId',
+            as: 'imagenes'
         });
     };
 

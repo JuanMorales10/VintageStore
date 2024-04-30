@@ -9,6 +9,7 @@ import ProductDetailPage from './components/pages/ProductPage/ProductDetailPage'
 import ProductForm from './components/pages/CreateForm/ProductForm';
 import EditProductForm from './components/pages/EditForm/EditProductForm';
 import ColeccionPage from './components/pages/Coleccion/ColeccionPage';
+import ProductList from './components/ProductList/ProductList';
 
 function App() {
   return (
@@ -20,10 +21,11 @@ function App() {
         <Header />
         <NavBar />
         <Routes>
-          {/* <Route path='/' element={<ProductForm />} /> */}
           <Route path='/' element={<Home />} />
+          <Route path='/create-product' element={<ProductForm />} />
           <Route path="/coleccion" element={<ColeccionPage />} />
           <Route path="/products/:productId" element={<ProductDetailPage />} />
+          <Route path='/categoria/:categoryId' element={<ProductList /> } />
           <Route path='/products/edit/:productId?' element={<EditProductForm />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

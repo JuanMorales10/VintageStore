@@ -33,7 +33,7 @@ const ColeccionPage = () => {
   useEffect(() => {
     (async function fetchCategorias() {
       try {
-        const response = await fetch('http://localhost:3002/api/categories');
+        const response = await fetch('http://localhost:3002/api/categorias');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

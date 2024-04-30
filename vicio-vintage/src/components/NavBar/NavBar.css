@@ -3,6 +3,7 @@
     background-color: #7ac3b0; /* Ajusta según tu diseño */
     padding: 10px 20px; /* Ajusta el espaciado según necesites */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para la barra de navegación */
+    width: 100vw;
 }
 
 .navbar-container {

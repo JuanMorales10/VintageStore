@@ -1,10 +1,12 @@
 .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #7ac3b0;
-    color: #fff;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #7ac3b0;
+  color: #fff;
+  width: 100vw;
   }
   
   .footer-left,
@@ -13,7 +15,8 @@
   }
   
   .footer-logo {
-    max-width: 150px; /* Ajusta el tamaño del logo según necesites */
+    max-width: 150px;
+    margin-left: 50px;
   }
   
   .social-icons {

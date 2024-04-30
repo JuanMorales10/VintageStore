@@ -1,22 +1,13 @@
-
-
 // import React from 'react';
 // import Carousel from 'react-multi-carousel';
 // import 'react-multi-carousel/lib/styles.css';
 // import './ProductDetailPage.css';
 // import ropa from '../../../assets/ropa.jpg'; // Asegúrate de que la ruta es correcta
-// import SimpleCarousel from '../../SimpleCarousel/SimpleCarousel';
+// import ProductList from '../../ProductList/ProductList';
 
 // const ProductDetailPage = () => {
-//   const product = {
-//     name: "Colorful Retro",
-//     description: "Vintage white t-shirt available. Authentic piece with a retro vibe. Grab it now!",
-//     images: [ropa, ropa, ropa], // Asegúrate de que las rutas de las imágenes son accesibles
-//     price: "29.99",
-//     size: "Medium",
-//     material: "100% Cotton",
-//     brand: "Vintage Finds"
-//   };
+
+
 
 //   const responsive = {
 //     desktop: { breakpoint: { max: 3000, min: 1024 }, items: 1 },
@@ -24,82 +15,45 @@
 //     mobile: { breakpoint: { max: 464, min: 0 }, items: 1 }
 //   };
 
-//   return (<>
-//       <SimpleCarousel />
-//     <div className="product-detail-container">
-//       {/* <Carousel responsive={responsive} infinite={true} showDots={true} autoPlay={true} autoPlaySpeed={3000}>
-//         {product.images.map((image, index) => (
-//           <img key={index} src={image} alt={product.name} className="carousel-image" />
-//         ))}
-//       </Carousel> */}
+//   return (
+//     <>
+//     <div className="product-detail-page">
+//       <div className="carousel-containerrr">
+//         <Carousel responsive={responsive} infinite={true} showDots={false} autoPlay={true} autoPlaySpeed={7000}>
+//           {product.images.map((image, index) => (
+//             <img key={index} src={image} alt={product.name} className="product-image" />
+//           ))}
+//         </Carousel>
+//       </div>
 //       <div className="product-detail-content">
 //         <h2 className="product-title">{product.name}</h2>
-//         <p className="product-location">Discover Retro Fashion - London, UK</p>
+//         <p className="product-price">${product.price}</p>
 //         <p className="product-description">{product.description}</p>
-//         <p className="product-price">now for ${product.price}</p>
-//         <ul className="product-meta">
-//           <li>Size: {product.size}</li>
-//           <li>Material: {product.material}</li>
-//           <li>Brand: {product.brand}</li>
-//         </ul>
-//         <button className="add-to-basket-button">Add to basket</button>
+//         <div className="product-meta">
+//           <span>Size: {product.size}</span>
+//           <span>Material: {product.material}</span>
+//           <span>Brand: {product.brand}</span>
+//         </div>
+//         <button className="add-to-basket-button">Add to Basket</button>
 //       </div>
-//       <SimpleCarousel />
 //     </div>
-//       </>
+//       <ProductList  products={topProducts} /> 
+//             </>
 //   );
 // };
 
 // export default ProductDetailPage;
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import './ProductDetailPage.css';
-import ropa from '../../../assets/ropa.jpg'; // Asegúrate de que la ruta es correcta
-import ProductList from '../../ProductList/ProductList';
 
 const ProductDetailPage = () => {
-
-  const topProducts = [
-    {
-      id: 1,
-      image: ropa ,
-      name: 'Producto 1',
-      price: '29.99',
-      link: '/buy/product1'
-    },
-    {
-        id: 2,
-        image: ropa ,
-        name: 'Producto 2',
-        price: '29.99',
-        link: '/buy/product1'
-      },
-      {
-        id: 2,
-        image: ropa ,
-        name: 'Producto 2',
-        price: '29.99',
-        link: '/buy/product1'
-      },
-      {
-        id: 2,
-        image: ropa ,
-        name: 'Producto 2',
-        price: '29.99',
-        link: '/buy/product1'
-      },    // más productos...
-  ];
-  const product = {
-    name: "Colorful Retro",
-    description: "Vintage white t-shirt available. Authentic piece with a retro vibe. Grab it now!",
-    images: [ropa, ropa, ropa],
-    price: "29.99",
-    size: "Medium",
-    material: "100% Cotton",
-    brand: "Vintage Finds"
-  };
+  const { productId } = useParams();
+  const [product, setProduct] = useState(null);
+  const [error, setError] = useState('');
 
   const responsive = {
     desktop: { breakpoint: { max: 3000, min: 1024 }, items: 1 },
@@ -107,32 +61,48 @@ const ProductDetailPage = () => {
     mobile: { breakpoint: { max: 464, min: 0 }, items: 1 }
   };
 
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`http://localhost:3002/api/products/${productId}`);
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || "Unable to fetch product");
+        setProduct(data);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    if (productId) fetchProduct();
+  }, [productId]);
+
+  if (error) return <p>Error loading product: {error}</p>;
+  if (!product) return <p>Loading...</p>;
+
   return (
     <>
-    <div className="product-detail-page">
-      <div className="carousel-containerrr">
-        <Carousel responsive={responsive} infinite={true} showDots={false} autoPlay={true} autoPlaySpeed={7000}>
-          {product.images.map((image, index) => (
-            <img key={index} src={image} alt={product.name} className="product-image" />
-          ))}
-        </Carousel>
-      </div>
-      <div className="product-detail-content">
-        <h2 className="product-title">{product.name}</h2>
-        <p className="product-price">${product.price}</p>
-        <p className="product-description">{product.description}</p>
-        <div className="product-meta">
-          <span>Size: {product.size}</span>
-          <span>Material: {product.material}</span>
-          <span>Brand: {product.brand}</span>
+      <div className="product-detail-page">
+        <div className="carousel-containerrr">
+          <Carousel responsive={responsive} infinite={true} showDots={false} autoPlay={true} autoPlaySpeed={7000}>
+            {product.imagenes.map((image, index) => (
+              <img key={index} src={`http://localhost:3002/img/products/${image.url}`} alt={`${product.nombre}-${index}`} className="product-image" />
+            ))}
+          </Carousel>
         </div>
-        <button className="add-to-basket-button">Add to Basket</button>
+        <div className="product-detail-content">
+          <h2 className="product-title">{product.nombre}</h2>
+          <p className="product-price">${product.precio}</p>
+          <p className="product-description">{product.descripcion}</p>
+          <div className="product-meta">
+            <span>Stock: {product.stock}</span>
+            <br />
+            <span>Size: {product.talla}</span>
+          </div>
+          <button className="add-to-basket-button">Add to Basket</button>
+        </div>
       </div>
-    </div>
-      <ProductList  products={topProducts} /> 
-            </>
+    </>
   );
 };
 
 export default ProductDetailPage;
-

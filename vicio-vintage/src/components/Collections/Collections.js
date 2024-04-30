@@ -56,7 +56,7 @@ const Collections = () => {
         <div className="img-content">
           <p>Zapatos</p>
           {/* Supongamos que el ID de la categoría de zapatos es 2 */}
-          <Link to="/categoria/2" className="but">SHOP NOW</Link>
+          <Link to="/categoria/9" className="but">SHOP NOW</Link>
         </div>
       </div>
       <div className="content">
@@ -64,7 +64,7 @@ const Collections = () => {
         <div className="img-content">
           <p>Accessories</p>
           {/* Supongamos que el ID de la categoría de accesorios es 3 */}
-          <Link to="/categoria/3" className="but">SHOP NOW</Link>
+          <Link to="/categoria/10" className="but">SHOP NOW</Link>
         </div>
       </div>
     </section>

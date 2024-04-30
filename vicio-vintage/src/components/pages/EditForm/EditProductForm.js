@@ -14,7 +14,7 @@ function EditProductForm({ productId }) {
     // Función para cargar los datos existentes del producto
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://localhost:3000/api/products/${productId}`);
+            const response = await fetch(`http://localhost:3002/api/products/${productId}`);
             const product = await response.json();
             setProductData({
                 nombre: product.nombre,
@@ -52,7 +52,7 @@ function EditProductForm({ productId }) {
         });
 
         try {
-            const response = await fetch(`/api/products/${productId}`, {
+            const response = await fetch(`http://localhost:3002/api/products/${productId}`, {
                 method: 'PUT',
                 body: formData
             });

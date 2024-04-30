@@ -7,14 +7,22 @@ const helmet = require('helmet');
 const cors = require('cors');
 const morgan = require('morgan');
 
+app.use(express.static("public"));
+
 // Middleware para parsear JSON y formularios
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const corsOptions = {
+    origin: 'http://localhost:3000', 
+    credentials: true, 
+  };
+
 // Seguridad y logging
 app.use(helmet());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(morgan('dev'));
+
 
 // Rutas principales
 app.use('/api', mainRoutes);
