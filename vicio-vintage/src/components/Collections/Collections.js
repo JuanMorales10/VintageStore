@@ -37,7 +37,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Collections.css';
 import accesorios from '../../assets/accesoriosv.jpg'
-import zapatosv from '../../assets/zapatosv.jpg'
+import zapatosv from '../../assets/zapatosv.avif'
 import ropa2 from '../../assets/ropav2.jpg'
 
 const Collections = () => {

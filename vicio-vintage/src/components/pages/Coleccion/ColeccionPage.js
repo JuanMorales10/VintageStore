@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './ColeccionPage.css'
 import accesorios from '../../../assets/accesoriosv.jpg'
-import camisetav from '../../../assets/camisetav.jpg'
-import chaquetav from '../../../assets/chaquetav.jpg'
-import denim from '../../../assets/denim.jpg'
-import faldav from '../../../assets/faldav.jpg'
-import pantalonv from '../../../assets/pantalonv.jpg'
-import pielv from '../../../assets/pielv.jpg'
-import totallook from '../../../assets/totallook.jpg'
-import vestidov from '../../../assets/vestidov.jpg'
-import zapatosv from '../../../assets/zapatosv.jpg'
+import camisetav from '../../../assets/camisetav.avif'
+import chaquetav from '../../../assets/chaquetav.avif'
+import denim from '../../../assets/denim.avif'
+import faldav from '../../../assets/faldav.avif'
+import pantalonv from '../../../assets/pantalonv.avif'
+import pielv from '../../../assets/pielv.avif'
+import totallook from '../../../assets/total-look.avif'
+import vestidov from '../../../assets/vestidov.avif'
+import zapatosv from '../../../assets/zapatosv.avif'
 
 const ColeccionPage = () => {
   const [categorias, setCategorias] = useState([]);

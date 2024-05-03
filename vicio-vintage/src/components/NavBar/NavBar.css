@@ -6,6 +6,15 @@
     width: 100vw;
 }
 
+.cart{
+    color: #fff9f9;
+    cursor: pointer;
+}
+
+.cart:hover{
+    color: #000;
+}
+
 .navbar-container {
     display: flex;
     justify-content: space-between;

@@ -1,49 +1,95 @@
-const db = require('../database/models'); // Asumiendo que usas Sequelize y tienes tus modelos configurados
+const db = require('../database/models'); // Asegúrate de que la ruta a tus modelos es correcta
 
 const userController = {
-    register: async (req, res) => {
+    // Crear un nuevo usuario
+    createUser: async (req, res) => {
         try {
-            const user = await db.Usuario.create(req.body);
-            res.status(201).send(user);
+            const { nombre, email, contrasena, direccion, telefono, rol } = req.body;
+            const newUser = await db.Usuario.create({
+                nombre,
+                email,
+                contrasena,
+                direccion,
+                telefono,
+                rol
+            });
+            res.status(201).json(newUser);
         } catch (error) {
-            res.status(400).send(error);
+            console.error('Error al crear usuario:', error);
+            res.status(500).json({ error: 'Error interno del servidor' });
         }
     },
 
-    login: async (req, res) => {
+    // Obtener todos los usuarios
+    getAllUsers: async (req, res) => {
         try {
-            const user = await db.Usuario.findOne({ where: { email: req.body.email } });
-            if (!user || !(await user.validPassword(req.body.contrasena))) {
-                return res.status(401).send({ message: 'Authentication failed' });
+            const users = await db.Usuario.findAll();
+            res.json(users);
+        } catch (error) {
+            console.error('Error al obtener usuarios:', error);
+            res.status(500).json({ error: 'Error interno del servidor' });
+        }
+    },
+
+    // Obtener un usuario por ID
+    getUserById: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const user = await db.Usuario.findByPk(id);
+            if (user) {
+                res.json(user);
+            } else {
+                res.status(404).json({ message: 'Usuario no encontrado' });
             }
-            res.send({ message: 'Login successful', user });
         } catch (error) {
-            res.status(500).send(error);
+            console.error('Error al obtener usuario:', error);
+            res.status(500).json({ error: 'Error interno del servidor' });
         }
     },
 
-    profile: async (req, res) => {
-        try {
-            const user = await db.Usuario.findByPk(req.user.id);
-            res.send(user);
-        } catch (error) {
-            res.status(404).send(error);
-        }
-    },
-
+    // Actualizar un usuario
     updateUser: async (req, res) => {
         try {
-            const user = await db.Usuario.findByPk(req.params.id);
+            const { id } = req.params;
+            const { nombre, email, contrasena, direccion, telefono, rol } = req.body;
+            const user = await db.Usuario.findByPk(id);
             if (user) {
-                await user.update(req.body);
-                res.send({ message: 'User updated', user });
+                await user.update({
+                    nombre,
+                    email,
+                    contrasena,
+                    direccion,
+                    telefono,
+                    rol
+                });
+                res.json({ message: 'Usuario actualizado', user });
             } else {
-                res.status(404).send({ message: 'User not found' });
+                res.status(404).json({ message: 'Usuario no encontrado' });
             }
         } catch (error) {
-            res.status(500).send(error);
+            console.error('Error al actualizar usuario:', error);
+            res.status(500).json({ error: 'Error interno del servidor' });
+        }
+    },
+
+    // Eliminar un usuario
+    deleteUser: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const user = await db.Usuario.findByPk(id);
+            if (user) {
+                await user.destroy();
+                res.json({ message: 'Usuario eliminado' });
+            } else {
+                res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+        } catch (error) {
+            console.error('Error al eliminar usuario:', error);
+            res.status(500).json({ error: 'Error interno del servidor' });
         }
     }
 };
+
+module.exports = userController;
 
 module.exports = userController;

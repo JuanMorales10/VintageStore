@@ -19,6 +19,10 @@
     object-fit: cover; /* Asegura que la imagen cubra el espacio designado sin distorsión */
 }
 
+.card-image-link {
+    text-decoration: none; /* Elimina el subrayado del enlace */
+}
+
 .card-body {
     padding: 10px;
     text-align: center;
@@ -26,6 +30,7 @@
 }
 
 .card-title {
+    text-decoration: none;
     font-size: 16px; /* Reduce el tamaño del título para espacios más pequeños */
     color: #333;
 }

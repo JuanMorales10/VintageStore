@@ -139,6 +139,46 @@ const productController = {
             res.status(500).json({ error: 'Error interno del servidor', details: error.message });
         }
     },
+
+    getLatestProducts: async (req, res) => {
+        try {
+            const latestProducts = await db.Producto.findAll({
+                order: [['id_producto', 'DESC']], // Ordena por id_producto en orden descendente
+                limit: 10, // Limita el resultado a los últimos 10 productos, puedes ajustar esto según tus necesidades
+                include: [
+                    { model: db.Categoria, as: 'categoria' },
+                    { model: db.ProductImage, as: 'imagenes' }
+                ]
+            });
+    
+            if (latestProducts.length === 0) {
+                return res.status(404).json({ message: 'No latest products found' });
+            }
+    
+            const formattedLatestProducts = latestProducts.map(product => ({
+                id: product.id_producto,
+                name: product.nombre,
+                description: product.descripcion,
+                price: product.precio,
+                stock: product.stock,
+                size: product.talla,
+                images: product.imagenes.map(image => image.url),
+                category: {
+                    id: product.categoria.id_categoria,
+                    name: product.categoria.nombre,
+                    description: product.categoria.descripcion,
+                    parentId: product.categoria.categoriaPadreId // Si necesitas el ID de la categoría padre
+                }
+            }));
+    
+            res.json(formattedLatestProducts);
+        } catch (error) {
+            console.error('Error al obtener los últimos productos:', error);
+            res.status(500).json({ error: 'Error interno del servidor' });
+        }
+    }
+,    
+      
     
     updateProduct: async (req, res) => {
         try {

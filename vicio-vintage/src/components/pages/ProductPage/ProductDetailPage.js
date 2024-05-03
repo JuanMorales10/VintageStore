@@ -49,6 +49,7 @@ import { useParams } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import './ProductDetailPage.css';
+import { addToCart } from '../../../utils/cartUtils'; 
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
@@ -76,6 +77,18 @@ const ProductDetailPage = () => {
     if (productId) fetchProduct();
   }, [productId]);
 
+  const handleAddToCart = () => {
+    const productToAdd = {
+      id: product.id,
+      nombre: product.nombre,
+      precio: product.precio,
+      imagenes: product.imagenes
+    };
+    addToCart(productToAdd, 1);  // Añade un producto con cantidad 1
+  };
+  
+
+
   if (error) return <p>Error loading product: {error}</p>;
   if (!product) return <p>Loading...</p>;
 
@@ -98,7 +111,9 @@ const ProductDetailPage = () => {
             <br />
             <span>Size: {product.talla}</span>
           </div>
-          <button className="add-to-basket-button">Add to Basket</button>
+          <button onClick={handleAddToCart} className="btn btn-primary btn-block btn-large">
+              Add to Cart
+            </button>
         </div>
       </div>
     </>

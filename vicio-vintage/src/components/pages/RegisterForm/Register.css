@@ -1,0 +1,72 @@
+/* Estilos generales para botones */
+.btn {
+    display: inline-block;
+    padding: 9px 14px;
+    margin-bottom: 0;
+    font-size: 15px;
+    line-height: normal;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #4a77d4;
+    border: 1px solid #3762bc;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.1s linear;
+  }
+  
+  .btn:hover, .btn:active, .btn.active {
+    background-color: #3672a4;
+    text-decoration: none;
+  }
+  
+  /* Ajustes de los inputs de los formularios */
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 13px;
+    border-radius: 4px;
+  }
+  
+  input:focus {
+    box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4), 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Estilos para los contenedores de login y registro */
+  .login, .register {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+  }
+  
+  .login h1, .register h1 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos del fondo del formulario */
+  body {
+    background: #092756; /* Fondo oscuro para mayor contraste */
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
