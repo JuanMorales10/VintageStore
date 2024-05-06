@@ -15,17 +15,17 @@ function App() {
   return (
     <Router>
     <div className='App' style={{
-        fontFamily: 'Lugrasimo, cursive',
+        fontFamily: 'Bungee Shade, sans-serif',
         fontOpticalSizing: 'auto'
       }}>
         <NavBar />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/carrito' element={<CartPage />} />
-          <Route path='/create-product' element={<ProductForm />} />
-          <Route path="/coleccion" element={<ColeccionPage />} />
-          <Route path="/products/:productId" element={<ProductDetailPage />} />
           <Route path='/categoria/:categoryId' element={<ProductList /> } />
+          <Route path="/coleccion" element={<ColeccionPage />} />
+          <Route path='/create-product' element={<ProductForm />} />
+          <Route path="/products/:productId" element={<ProductDetailPage />} />
           <Route path='/products/edit/:productId?' element={<EditProductForm />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -8,6 +8,8 @@ const LProductList = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    console.log(products)
+
     useEffect(() => {
         const fetchLatestProducts = async () => {
             try {

@@ -104,6 +104,8 @@ const ProductList = () => {
 
     const { categoryId } = useParams();
 
+    console.log(products)
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {

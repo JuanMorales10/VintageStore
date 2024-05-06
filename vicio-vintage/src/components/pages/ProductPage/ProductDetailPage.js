@@ -79,12 +79,14 @@ const ProductDetailPage = () => {
 
   const handleAddToCart = () => {
     const productToAdd = {
-      id: product.id,
+      id: product.id_producto,
       nombre: product.nombre,
       precio: product.precio,
-      imagenes: product.imagenes
+      imagenes: product.imagenes,
+      talla: product.talla
     };
-    addToCart(productToAdd, 1);  // Añade un producto con cantidad 1
+    addToCart(productToAdd, 1);  
+  // console.log(productToAdd)
   };
   
 
