@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3002;
 const mainRoutes = require('./rutas/index');
 const helmet = require('helmet');
 const cors = require('cors');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const morgan = require('morgan');
 
 app.use(express.static("public"));

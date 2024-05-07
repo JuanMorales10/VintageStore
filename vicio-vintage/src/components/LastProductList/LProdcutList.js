@@ -35,8 +35,12 @@ const LProductList = () => {
             items: 4
         },
         tablet: {
-            breakpoint: { max: 1024, min: 464 },
+            breakpoint: { max: 1024, min: 764 },
             items: 3
+        },
+        tablet2: {
+            breakpoint: { max: 764, min: 464 },
+            items: 2
         },
         mobile: {
             breakpoint: { max: 464, min: 0 },
@@ -58,7 +62,6 @@ const LProductList = () => {
                     keyBoardControl={true}
                     customTransition="all .5s"
                     containerClass="carousel-container"
-                    removeArrowOnDeviceType={["tablet", "mobile"]}
                     dotListClass="custom-dot-list-style"
                     itemClass="carousel-item-padding-40-px">
                     {products.map((product) => (

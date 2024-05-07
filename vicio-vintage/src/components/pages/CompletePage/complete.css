@@ -1,0 +1,38 @@
+/* complete-cancel-page.css */
+.complete-cancel-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Ajusta la altura según necesites */
+    text-align: center;
+    padding: 20px;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+.complete-cancel-container h1 {
+    font-size: 2.5rem;
+    color: #4CAF50; /* Verde para completado, puedes cambiarlo para cancelado */
+    margin-bottom: 20px;
+}
+
+.complete-cancel-container p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.complete-cancel-container a {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    background-color: #007BFF; /* Azul, considera cambiar el color para cancelado */
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.complete-cancel-container a:hover {
+    background-color: #0056b3;
+}

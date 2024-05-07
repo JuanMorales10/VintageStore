@@ -1,83 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import { getCart, removeFromCart, updateCart, clearCart } from '../../../utils/cartUtils';
-// import './CartPage.css'; // Asegúrate de tener los estilos correspondientes en CartPage.css
-
-// const CartPage = () => {
-//   const [cart, setCart] = useState([]);
-
-//   useEffect(() => {
-//     const fetchCart = () => {
-//       const storedCart = getCart();
-//       setCart(storedCart);
-//     };
-
-//     fetchCart();
-//   }, []);
-
-//   const handleRemoveFromCart = (productId) => {
-//     removeFromCart(productId);
-//     const updatedCart = cart.filter(item => item.id !== productId);
-//     setCart(updatedCart);
-//   };
-
-//   const handleUpdateCart = (productId, newQuantity) => {
-//     if (newQuantity > 0) {
-//       updateCart(productId, newQuantity);
-//       const updatedCart = cart.map(item => {
-//         if (item.id === productId) {
-//           return { ...item, quantity: newQuantity };
-//         }
-//         return item;
-//       });
-//       setCart(updatedCart);
-//     }
-//   };
-
-//   const handleClearCart = () => {
-//     clearCart();
-//     setCart([]);
-//   };
-
-//   return (
-//     <div className="cart-container">
-//       <h2>Your Cart</h2>
-//       {cart.length === 0 ? (
-//         <p>Your cart is empty.</p>
-//       ) : (
-//         <>
-//           <div className="cart-items">
-//             {cart.map((item, index) => (
-//               <div key={index} className="cart-item">
-//                 <div className="cart-item-img">
-//                   {item.imagenes && item.imagenes.length > 0 && (
-//                     <img src={`http://localhost:3002/img/products/${item.imagenes[0].url}`} alt={item.nombre} />
-//                   )}
-//                 </div>
-//                 <div className="cart-item-info">
-//                   <h3>{item.nombre}</h3>
-//                   <p>Price: ${item.precio}</p>
-//                   <p>Quantity: 
-//                     <input
-//                       type="number"
-//                       min="1"
-//                       value={item.quantity}
-//                       onChange={(e) => handleUpdateCart(item.id, parseInt(e.target.value))}
-//                     />
-//                   </p>
-//                   <button onClick={() => handleRemoveFromCart(item.id)}>Remove</button>
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//           <button onClick={handleClearCart}>Clear Cart</button>
-//         </>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default CartPage;
-
 import React, { useState, useEffect } from 'react';
 import { getCart, removeFromCart, updateCart, clearCart } from '../../../utils/cartUtils';
 import './CartPage.css';
@@ -102,8 +22,8 @@ const CartItem = ({ item, onRemove, onUpdate }) => {
             </div>
             <div className="cart-item-info">
                 <h3>{item.nombre}</h3>
-                <p>Price: ${item.precio}</p>
-                <p>Quantity:
+                <p>Precio: ${item.precio}</p>
+                <p>Cantidad:
                     <input
                         type="number"
                         min="1"
@@ -144,18 +64,48 @@ const CartPage = () => {
       setCart([]);
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const productInfo = cart.map(item => ({
+        nombre: item.nombre,
+        precio: item.precio,
+        id: item.id,
+        quantity: item.quantity,
+        imageUrl: item.imagenes[0].url  
+    }));
+    
+
+    console.log(productInfo)
+
+    const response = await fetch('http://localhost:3002/api/checkout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productos: productInfo }),
+    });
+
+    const responseData = await response.json();
+    if (response.ok) {
+        window.location.href = responseData.url; // Redireccionar al URL de Stripe
+    } else {
+        console.error('Error al procesar el pago:', responseData.error);
+    }
+};
+
   return (
-      <div className="cart-container">
-          <h2>Your Cart</h2>
-          {cart.length === 0 ? <p>Your cart is empty.</p> : (
-              <div className="cart-items">
-                  {cart.map((item) => (
-                      <CartItem key={item.id} item={item} onRemove={handleRemoveFromCart} onUpdate={handleUpdateCart} />
-                  ))}
-                  <button onClick={handleClearCart}>Clear Cart</button>
-              </div>
-          )}
-      </div>
+    <div className="cart-container">
+    <h2>Tu Carrito</h2>
+    {cart.length === 0 ? <p>Tu carrito está vacío.</p> : (
+        <div className="cart-items">
+            {cart.map((item) => (
+                <CartItem key={item.id} item={item} onRemove={handleRemoveFromCart} onUpdate={handleUpdateCart} />
+            ))}
+            <button onClick={handleClearCart}>Vaciar Carrito</button>
+            <button onClick={handleSubmit}>Pagar</button>
+        </div>
+    )}
+</div>
   );
 };
 

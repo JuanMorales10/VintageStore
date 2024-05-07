@@ -40,17 +40,32 @@
     display: flex;
     margin: 0;
     padding: 0;
-    margin-right: 30px;
+    margin-right: 8vw;
 }
 
 .menu-items li {
     padding: 0 15px; /* Espaciado entre elementos del menú */
 }
 
+.cart-count {
+    position: absolute;
+    top: 30px;
+    right: 8vw;
+    background-color: #c81d1d;
+    color: white;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .menu-items li a {
     text-decoration: none;
     color: #fff9f9; /* Color del texto del enlace */
-    font-weight: 500;
+    font-size: larger
 }
 
 .menu-items li a:hover {

@@ -57,7 +57,7 @@ button:hover {
         padding: 15px;
     }
 
-    input, textarea, button {
+    input, textarea {
         width: 100%; /* Asegura que el formulario sea fácil de usar en dispositivos móviles */
     }
 }

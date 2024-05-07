@@ -56,17 +56,6 @@
     text-align: center;
     margin-bottom: 20px;
   }
-  
-  /* Estilos del fondo del formulario */
-  body {
-    background: #092756; /* Fondo oscuro para mayor contraste */
-    color: #fff;
-    font-family: 'Open Sans', sans-serif;
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+
   
   
