@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Card from '../Card/Card';
-import '../ProductList/ProductList.css';
+import './LProductList.css';
 
 const LProductList = () => {
     const [products, setProducts] = useState([]);
@@ -49,7 +49,7 @@ const LProductList = () => {
     };
 
     return (
-        <section className="product-list">
+        <section className="lproduct-list">
             <h2 className='tit'>Últimos Productos</h2>
             {loading ? (
                 <p>Cargando...</p>

@@ -7,7 +7,6 @@ const MainBanner = () => {
   return (
     <section id="home">
       <div className="home_page">
-      <p className="collectio">Colección</p>
         <div className="home_img">
           <img src={test} alt="Summer Collection" />
         </div>

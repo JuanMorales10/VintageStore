@@ -1,102 +1,94 @@
-/* Estilos para la barra de navegación */
 .navbar {
-    background-color: #7ac3b0; /* Ajusta según tu diseño */
-    padding: 10px 20px; /* Ajusta el espaciado según necesites */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para la barra de navegación */
-}
-
-.cart{
-    color: #fff9f9;
-    cursor: pointer;
-}
-
-.cart:hover{
-    color: #000;
-}
-
-.navbar-container {
+    background-color: #0f0f0f59;
+    height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100px;
-    position: relative;
     z-index: 10;
-}
-
-.hamburger-lines {
-    display: none; /* Oculta por defecto, se muestra en pantallas pequeñas */
-}
-
-.hamburger-lines .line {
-    width: 30px;
-    height: 3px;
-    background-color: black;
-    margin: 5px 0;
-    transition: all 0.3s ease-in-out;
-}
-
-.menu-items {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    margin-right: 8vw;
-}
-
-.menu-items li {
-    padding: 0 15px; /* Espaciado entre elementos del menú */
-}
-
-.cart-count {
     position: absolute;
-    top: 30px;
-    right: 8vw;
-    background-color: #c81d1d;
-    color: white;
-    font-size: 12px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    width: 100%;
+}
+
+.navbar-logo {
+    color: #fff;
+    justify-self: start;
+    margin-left: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 2rem;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
-.menu-items li a {
+.navbar-logo img {
+    height: 100px;
+}
+
+.navbar-toggle {
+    display: none;
+    position: absolute;
+    top: 35px;
+    right: 8%;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: #fff;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    text-align: center;
+    margin-right: 22px;
+}
+
+.navbar-item {
+    height: 80px;
+}
+
+.navbar-links {
+    color: #fff;
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    color: #fff9f9; /* Color del texto del enlace */
-    font-size: larger
+    padding: 0.5rem 1rem;
+    height: 100%;
 }
 
-.menu-items li a:hover {
-    color: #000; /* Cambio de color al pasar el ratón */
+.navbar-links:hover {
+    background-color: #e2e7ec2f;
+    border-radius: 4px;
 }
 
-.logo {
-    height: 50px; 
-    position: relative;
-    ;
-}
+@media screen and (max-width: 960px) {
+    .navbar-menu {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 90vh;
+        position: absolute;
+        top: 80px;
+        left: -100%;
+        opacity: 1;
+        transition: all 0.5s ease;
+    }
 
-.logo img {
-    height: auto;
-    width: 168px;
-    position: relative;
-bottom: 58px;
-left: 50px;
-}
+    .navbar-menu.active {
+        background: #242222;
+        left: 0;
+        opacity: 1;
+        transition: all 0.5s ease;
+        z-index: 1;
+    }
 
-
-
-/* Estilos para dispositivos móviles */
-@media (max-width: 768px) {
-    .hamburger-lines {
+    .navbar-toggle {
         display: block;
     }
-
-    .menu-items {
-        display: none; /* Oculta los elementos del menú en dispositivos móviles */
-    }
-
-    /* Más estilos responsivos según necesites */
 }

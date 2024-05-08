@@ -57,9 +57,9 @@ function App() {
     <Router>
       <div className='App' style={{
           fontFamily: 'Bungee Shade, sans-serif',
-          fontOpticalSizing: 'auto'
+          fontOpticalSizing: 'auto',
+          boxSizing: 'border-box'
         }}>
-          <NavBar />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/carrito' element={<CartPage />} />

@@ -133,6 +133,7 @@
 
 import React, { useState, useEffect } from 'react';
 import './ProductForm.css';
+import NavBar from '../../NavBar/NavBar';
 
 function ProductForm() {
     const [categorias, setCategorias] = useState([]);
@@ -224,7 +225,9 @@ function ProductForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <>
+        <NavBar />
+        <form onSubmit={handleSubmit} className='formcreate'>
             <label htmlFor="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" value={productData.nombre} onChange={handleChange} required />
 
@@ -269,6 +272,7 @@ function ProductForm() {
 
             <button type="submit">Crear Producto</button>
         </form>
+                </>
     );
 }
 

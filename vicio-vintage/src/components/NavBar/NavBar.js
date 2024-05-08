@@ -1,95 +1,40 @@
-// import React from 'react';
-// import './NavBar.css';
-// import { Link } from 'react-router-dom';
-// import logo from '../../assets/logovintage.png';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-
-// const NavBar = () => {
-//   return (
-//     <nav className="navbar">
-//       <div className="navbar-container">
-//         <div className="logo">
-//           <Link to='/'>
-//             <img src={logo} alt="Logo" />
-//           </Link>
-//         </div>
-//         <div className="hamburger-lines">
-//           <span className="line line1"></span>
-//           <span className="line line2"></span>
-//           <span className="line line3"></span>
-//         </div>
-//         <ul className="menu-items">
-//           <li><Link to="/coleccion">Colección</Link></li>
-//           <li><Link to="/contact">Contactanos</Link></li>
-//           <li><Link to='/carrito'><FontAwesomeIcon icon={faShoppingCart}  className='cart'/></Link></li>  
-//         </ul>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default NavBar;
-
-import React, { useState, useEffect } from 'react';
-import './NavBar.css';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/logovintage.png';
+import './NavBar.css';
+import logo from '../../assets/logovintage.png'; // Asegúrate de que la ruta al logo es correcta
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { getCartItemCount } from '../../utils/cartUtils';  
 
 const NavBar = () => {
-  const [cartItemCount, setCartItemCount] = useState(0);
+    const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    const updateCartCount = () => {
-      const count = getCartItemCount();
-      setCartItemCount(count);
-    };
+    const toggleMenu = () => setIsOpen(!isOpen);
 
-    updateCartCount();
-
-    // Escuchar cambios en el local storage
-    window.addEventListener('storage', updateCartCount);
-
-    // Limpiar el listener
-    return () => {
-      window.removeEventListener('storage', updateCartCount);
-    };
-  }, []);
-
-  return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <div className="logo">
-          <Link to='/'>
-            <img src={logo} alt="Logo" />
-          </Link>
-        </div>
-        <div className="hamburger-lines">
-          <span className="line line1"></span>
-          <span className="line line2"></span>
-          <span className="line line3"></span>
-        </div>
-        <ul className="menu-items">
-          <li><Link to="/coleccion">Colección</Link></li>
-          <li><Link to="/contact">Contactanos</Link></li>
-          <li>
-            <Link to='/carrito'>
-              <FontAwesomeIcon icon={faShoppingCart} className='cart'/>
-              {/* {cartItemCount > 0 && (
-                <span className='cart-count'>{cartItemCount}</span>
-              )} */}
+    return (
+        <nav className="navbar">
+            <Link to="/" className="navbar-logo">
+                <img src={logo} alt="Logo" />
             </Link>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  );
+            <div className="navbar-toggle" id="mobile-menu" onClick={toggleMenu}>
+                <span className="bar"></span>
+                <span className="bar"></span>
+                <span className="bar"></span>
+            </div>
+            <ul className={`navbar-menu ${isOpen ? 'active' : ''}`}>
+                <li className="navbar-item">
+                    <Link to="/coleccion" className="navbar-links">Colección</Link>
+                </li>
+                <li className="navbar-item">
+                    <Link to="/contact" className="navbar-links">Contáctanos</Link>
+                </li>
+                <li className="navbar-item">
+                    <Link to="/carrito" className="navbar-links">
+                        <FontAwesomeIcon icon={faShoppingCart} />
+                    </Link>
+                </li>
+            </ul>
+        </nav>
+    );
 };
 
 export default NavBar;
-
-
-

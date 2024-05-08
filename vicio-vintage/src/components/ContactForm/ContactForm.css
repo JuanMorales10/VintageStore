@@ -7,6 +7,9 @@
 
 .contact-form form {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .contact-form input, .contact-form textarea {

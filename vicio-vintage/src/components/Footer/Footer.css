@@ -3,15 +3,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
   background-color: #7ac3b0;
-  color: #fff;
-  width: 100vw;
+  color: hsl(0, 0%, 100%);
+  width: 100%;
   }
   
   .footer-left,
   .footer-right {
     flex: 1; /* Ocupan cada uno el 50% del espacio disponible */
+  }
+
+  .footer-right{
+    display: flex;
+    align-items: center;
   }
   
   .footer-logo {
@@ -22,16 +26,17 @@
   .social-icons {
     display: flex;
     justify-content: center; /* Centra los iconos de redes sociales */
+    margin-left: 30px;
   }
   
   .social-icons a {
-    color: #fff;
-    margin: 0 10px; /* Espacio entre iconos */
-    font-size: 24px; /* Tamaño de los iconos */
+    color: #ffffff; 
+    font-size: 24px;  
+    margin-right: 20px; 
   }
   
   .social-icons a:hover {
-    color: #ff5e14; /* Cambio de color al pasar el mouse */
+    color: #555; /* Cambia el color al pasar el ratón */
   }
   
   /* Estilos responsivos para pantallas pequeñas */
@@ -46,6 +51,11 @@
       width: 100%; /* Cada sección toma el ancho completo */
       text-align: center; /* Centrado del contenido en dispositivos móviles */
       margin-bottom: 20px; /* Espacio entre las secciones */
+      justify-content: center;
+    }
+
+    .footer-logo{
+      margin-left: 0;
     }
   }
   

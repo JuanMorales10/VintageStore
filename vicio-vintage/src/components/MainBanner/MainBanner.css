@@ -38,13 +38,13 @@
 
 .home_txt {
     position: absolute;
-    right: 5%;
+    right: 12%;
     color: #fff;
     text-align: left;
     background-color: #fff3;
     border-radius: 10px;
     padding: 15px;
-    top: 140px;
+    top: 250px;
 }
 
 .collectio {
@@ -77,4 +77,19 @@
 
 .home_txt button:hover {
     background-color: #0056b3;
+}
+
+@media (max-width: 1000px) {
+    .home_txt{
+        top: 150px;
+    }
+
+
+}
+
+@media (max-width: 450px){
+.home_txt {
+    top: 120px;
+    left: 70px;
+}
 }

@@ -6,6 +6,7 @@ import './ProductDetailPage.css';
 import { addToCart } from '../../../utils/cartUtils';
 import Swal from 'sweetalert2';
 import LProductList from './../../LastProductList/LProdcutList';
+import NavBar from '../../NavBar/NavBar';
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
@@ -62,6 +63,7 @@ const ProductDetailPage = () => {
 
   return (
     <>
+    <NavBar />
       <div className="product-detail-page">
         <div className="carousel-containerrr">
           <Carousel responsive={responsive} infinite={true} showDots={false} autoPlay={true} autoPlaySpeed={7000}>

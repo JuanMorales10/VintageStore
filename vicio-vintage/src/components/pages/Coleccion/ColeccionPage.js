@@ -11,6 +11,7 @@ import pielv from '../../../assets/pielv.avif'
 import totallook from '../../../assets/total-look.avif'
 import vestidov from '../../../assets/vestidov.avif'
 import zapatosv from '../../../assets/zapatosv.avif'
+import NavBar from '../../NavBar/NavBar';
 
 const ColeccionPage = () => {
   const [categorias, setCategorias] = useState([]);
@@ -57,6 +58,8 @@ const ColeccionPage = () => {
     return <div>Error: {error}</div>;
   }
   return (
+    <>
+    <NavBar />
     <div className="coleccion-page">
       <h1>Catálogo</h1>
       <div className="categorias-container">
@@ -73,6 +76,7 @@ const ColeccionPage = () => {
 
       </div>
     </div>
+        </>
   );
 };
 

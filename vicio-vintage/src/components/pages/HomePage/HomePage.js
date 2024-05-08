@@ -6,11 +6,13 @@ import NewsSection from '../../NewsSection/NewSection';
 import ContactForm from '../../ContactForm/ContactForm';
 import ropa from '../../../assets/ropa.jpg'
 import LProductList from '../../LastProductList/LProdcutList';
+import NavBar from '../../NavBar/NavBar';
 
 function HomePage() {
  
   return (
     <div className="home-page">
+      <NavBar />
       <MainBanner />
       <Collections /> 
       <LProductList />     

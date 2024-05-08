@@ -1,0 +1,43 @@
+
+
+.lproduct-list {
+    padding: 20px;
+    margin: auto;
+}
+
+.pa{
+    display: flex;
+    justify-content: center;
+}
+
+.pa select{
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 3px solid #7ac3b0
+}
+
+
+.p{
+    justify-content: center;
+    display: flex;
+    font-size: 20px;
+}
+.tit{
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-container {
+    padding: 20px 0; /* Ajusta el padding si es necesario */
+}
+
+.custom-dot-list-style {
+    text-align: center;  
+}
+
+.carousel-item-padding-40-px {
+    padding-right: 10px; /* Reduce el espacio entre tarjetas si es necesario */
+}

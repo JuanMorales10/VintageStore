@@ -1,100 +1,48 @@
-/* Estilos para la lista de productos, similar al CSS que ya has definido
-.seller {
-    padding: 20px 0;
-    text-align: center;
-}
 
-.best-seller {
+
+
+
+
+
+
+
+.products-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 20px; /* Añade espacio entre los productos */
 }
-
-.best-p1 {
-    width: 250px;
-    margin: 15px;
-    position: relative;
-}
-
-.best-p1 img {
-    width: 100%;
-    height: auto;
-}
-
-.card{
-    margin: 10px;
-}
-
-.best-p1-txt {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    border-radius: 5px;
-}
-
-.name-of-p p, .rating, .price {
-    margin: 5px 0;
-}
-
-.buy-now button {
-    width: 100%;
-    padding: 10px;
-    background-color: #dca3ffe0;
-    border: none;
-    color: #fff;
-}
-
-button a{
-    color: #fff !important;
-    text-decoration: none;
-}
-
-.buy-now button:hover {
-    background-color: #0056b3;
-} */
 
 .product-list {
     padding: 20px;
     margin: auto;
 }
 
-.pa{
+.pa {
     display: flex;
     justify-content: center;
 }
 
-.pa select{
+.pa select {
     padding: 5px;
     border-radius: 5px;
     background-color: #fff;
-    border: 3px solid #7ac3b0
+    border: 3px solid #7ac3b0;
 }
 
-
-.p{
+.p {
     justify-content: center;
     display: flex;
     font-size: 20px;
 }
-.tit{
-    font-size: 25px;
+
+.tit {
+    font-size: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.carousel-container {
-    padding: 20px 0; /* Ajusta el padding si es necesario */
+.product-list{
+    padding: 120px 0 20px 0 !important;
 }
-
-.custom-dot-list-style {
-    text-align: center;  
-}
-
-.carousel-item-padding-40-px {
-    padding-right: 10px; /* Reduce el espacio entre tarjetas si es necesario */
-}
-

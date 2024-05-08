@@ -1,10 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { getCart, removeFromCart, updateCart, clearCart } from '../../../utils/cartUtils';
 import './CartPage.css';
+import NavBar from '../../NavBar/NavBar';
+
+// const CartItem = ({ item, onRemove, onUpdate }) => {
+
+//   console.log(item)
+//     const [quantity, setQuantity] = useState(item.quantity);
+
+//     const handleChange = (e) => {
+//         const newQuantity = parseInt(e.target.value, 10);
+//         setQuantity(newQuantity);
+//         onUpdate(item.id, newQuantity);
+//     };
+
+//     return (
+//         <div className="cart-item">
+//             <div className="cart-item-img">
+//                 {item.imagenes && item.imagenes.length > 0 && (
+//                     <img src={`http://localhost:3002/img/products/${item.imagenes[0].url}`} alt={item.nombre} />
+//                 )}
+//             </div>
+//             <div className="cart-item-info">
+//                 <h3>{item.nombre}</h3>
+//                 <p>Precio: ${item.precio}</p>
+//                 <p>Cantidad:
+//                     <input
+//                         type="number"
+//                         min="1"
+//                         value={quantity}
+//                         onChange={handleChange}
+//                     />
+//                 </p>
+//                 <button onClick={() => onRemove(item.id)}>Remove</button>
+//             </div>
+//         </div>
+//     );
+// };
 
 const CartItem = ({ item, onRemove, onUpdate }) => {
-
-  console.log(item)
     const [quantity, setQuantity] = useState(item.quantity);
 
     const handleChange = (e) => {
@@ -20,18 +54,16 @@ const CartItem = ({ item, onRemove, onUpdate }) => {
                     <img src={`http://localhost:3002/img/products/${item.imagenes[0].url}`} alt={item.nombre} />
                 )}
             </div>
-            <div className="cart-item-info">
+            <div className="cart-item-details">
                 <h3>{item.nombre}</h3>
-                <p>Precio: ${item.precio}</p>
-                <p>Cantidad:
-                    <input
-                        type="number"
-                        min="1"
-                        value={quantity}
-                        onChange={handleChange}
-                    />
-                </p>
-                <button onClick={() => onRemove(item.id)}>Remove</button>
+                <p className="price">Precio: ${item.precio}</p>
+                <div className="quantity">
+                    Cantidad:
+                    <input type="number" min="1" value={quantity} onChange={handleChange} />
+                </div>
+                <div className="actions">
+                    <button onClick={() => onRemove(item.id)} className="remove-btn">Eliminar</button>
+                </div>
             </div>
         </div>
     );
@@ -94,6 +126,8 @@ const CartPage = () => {
 };
 
   return (
+    <>
+    <NavBar />
     <div className="cart-container">
     <h2>Tu Carrito</h2>
     {cart.length === 0 ? <p>Tu carrito está vacío.</p> : (
@@ -106,6 +140,7 @@ const CartPage = () => {
         </div>
     )}
 </div>
+    </>
   );
 };
 

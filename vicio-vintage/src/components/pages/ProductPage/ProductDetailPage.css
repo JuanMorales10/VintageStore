@@ -2,11 +2,12 @@
 .product-detail-page {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
-    padding: 20px;
+    padding: 120px 0 20px;
     max-width: 1500px;
     margin: auto;
+    background-color: #8cc8b8;
   }
   
   .carousel-container {
@@ -20,7 +21,8 @@
   
   .product-image {
     width: 100%;
-    height: auto;
+    object-fit: cover;
+    height: 500px;
   }
   
   .product-detail-content {
@@ -33,7 +35,7 @@
     align-items: center;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); 
-  background-color: #8cc8b8;
+  background-color: #ffffff;
 }
 
   

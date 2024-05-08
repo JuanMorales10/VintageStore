@@ -44,3 +44,22 @@
 .news-content a:hover {
     text-decoration: underline;
 }
+
+
+@media (max-width: 767px) {
+    .news-container{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .news-item{
+        width: 70%;
+    }
+}
+
+@media (max-width: 468px) {
+
+    .news-item{
+        width: 60%;
+    }
+}
