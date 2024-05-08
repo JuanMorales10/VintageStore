@@ -5,16 +5,16 @@ import './Register.css'; // Asegúrate de que el archivo CSS está correctamente
 const RegisterForm = () => {
     const [nombre, setNombre] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [contrasena, setPassword] = useState('');
     const [direccion, setDireccion] = useState('');
     const [telefono, setTelefono] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('http://localhost:3002/api/register', {
+            const response = await fetch('http://localhost:3002/api/users/', {
                 method: 'POST',
-                body: JSON.stringify({ nombre, email, password, direccion, telefono }),
+                body: JSON.stringify({ nombre, email, contrasena, direccion, telefono }),
                 headers: { 'Content-Type': 'application/json' }
             });
             const data = await response.json();
@@ -53,7 +53,7 @@ const RegisterForm = () => {
                     name="password"
                     placeholder="Password"
                     required="required"
-                    value={password}
+                    value={contrasena}
                     onChange={e => setPassword(e.target.value)}
                 />
                 <input

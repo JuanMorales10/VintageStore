@@ -1,22 +1,48 @@
-const db = require('../database/models'); // Asegúrate de que la ruta a tus modelos es correcta
+const db = require('../database/models'); 
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const userController = {
     // Crear un nuevo usuario
     createUser: async (req, res) => {
         try {
-            const { nombre, email, contrasena, direccion, telefono, rol } = req.body;
+            const { nombre, email, direccion, telefono, rol } = req.body;
+            const hashedPassword = await bcrypt.hash(req.body.contrasena, saltRounds);
+
             const newUser = await db.Usuario.create({
                 nombre,
                 email,
-                contrasena,
+                contrasena: hashedPassword,
                 direccion,
                 telefono,
                 rol
             });
-            res.status(201).json(newUser);
+
+            res.status(201).json({ message: 'User created successfully', user: newUser });
         } catch (error) {
-            console.error('Error al crear usuario:', error);
-            res.status(500).json({ error: 'Error interno del servidor' });
+            console.error('Error creating user:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    },
+
+    login: async (req, res) => {
+
+        console.log(req.body)
+
+        const { email, contrasena } = req.body;
+        // Aquí deberías verificar las credenciales del usuario con la base de datos
+        const user = await db.Usuario.findOne({ where: { email: email } });
+        if (user && bcrypt.compareSync(contrasena, user.contrasena)) {
+            // Usuario autenticado
+            const token = jwt.sign(
+                { id: user.id_usuario, email: user.email, rol: user.rol },
+                process.env.JWT_SECRET,
+                { expiresIn: '24h' }
+            );
+            res.json({ success: true, token: token });
+        } else {
+            res.status(401).json({ success: false, message: 'Credenciales incorrectas' });
         }
     },
 
@@ -92,4 +118,4 @@ const userController = {
 
 module.exports = userController;
 
-module.exports = userController;
+

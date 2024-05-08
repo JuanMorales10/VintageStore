@@ -1,55 +1,52 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './Login.css'; // Asegúrate de que el archivo CSS está correctamente vinculado
+import { useNavigate } from 'react-router-dom';
+import './Login.css';  // Importa el CSS directamente si no usas CSS Modules
 
-const LoginForm = () => {
+const AdminLogin = () => {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [contrasena, setPassword] = useState('');
+    const navigate = useNavigate();
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            const response = await fetch('http://localhost:3002/api/login', {
-                method: 'POST',
-                body: JSON.stringify({ email, password }),
-                headers: { 'Content-Type': 'application/json' }
-            });
-            const data = await response.json();
-            console.log("Login response:", data);
-            // Aquí manejar la respuesta, como guardar token en localStorage, redireccionar, etc.
-        } catch (error) {
-            console.error('Login failed:', error);
+    const handleLogin = async () => {
+        const response = await fetch('http://localhost:3002/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, contrasena })
+        });
+        const data = await response.json();
+        if (response.ok) {
+            localStorage.setItem('token', data.token);
+            navigate('/admin/dashboard');
+        } else {
+            alert(data.message || 'Invalid credentials');
         }
     };
 
     return (
-        <div className="login">
-            <Link to="/">
-                <img src="/path/to/your/logo.png" alt="Home" className="login-logo"/>
-            </Link>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
+        <div className="login-container">
+            <div className="login-form">
                 <input
                     type="email"
-                    name="email"
-                    placeholder="Email"
-                    required="required"
                     value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
                 />
                 <input
                     type="password"
-                    name="password"
+                    value={contrasena}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
-                    required="required"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
                 />
-                <button type="submit" className="btn btn-primary btn-block btn-large">Entrar.</button>
-            </form>
+                <button onClick={handleLogin}>Login</button>
+            </div>
         </div>
     );
 };
 
-export default LoginForm;
+export default AdminLogin;
+
+
+
 

@@ -8,6 +8,10 @@ const productController = {
                 include: [
                     { model: db.Categoria, as: 'categoria' },
                     { model: db.ProductImage, as: 'imagenes' }
+                ],
+                order: [
+                    [{ model: db.Categoria, as: 'categoria' }, 'nombre', 'ASC'], // Ordena primero por el nombre de la categoría
+                    ['nombre', 'ASC'] // Luego ordena por el nombre del producto
                 ]
             });
             res.json(products);
@@ -16,7 +20,7 @@ const productController = {
             res.status(500).json({ error: 'Error interno del servidor' });
         }
     },
-
+    
     getProductById: async (req, res) => {
         try {
             const product = await db.Producto.findByPk(req.params.id, {
@@ -210,7 +214,11 @@ const productController = {
             if (!product) {
                 return res.status(404).json({ message: 'Product not found' });
             }
-
+    
+            // Eliminar todas las imágenes asociadas primero
+            await db.ProductImage.destroy({ where: { productId: req.params.id } });
+    
+            // Después eliminar el producto
             await product.destroy();
             res.json({ message: 'Producto eliminado con éxito' });
         } catch (error) {
@@ -218,6 +226,8 @@ const productController = {
             res.status(500).json({ error: 'Error interno del servidor' });
         }
     }
+    
+    
 };
 
 module.exports = productController;

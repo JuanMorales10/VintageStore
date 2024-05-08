@@ -1,53 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import '../CreateForm/ProductForm.css'; 
+import { useParams } from 'react-router-dom';
+import './EditForm.css';  // Asegúrate de que el camino al CSS es correcto
 
-function EditProductForm({ productId }) {
+const EditProductForm = () => {
+    const { productId } = useParams(); // Usar useParams para obtener el parámetro desde la URL
     const [productData, setProductData] = useState({
         nombre: '',
         descripcion: '',
         precio: '',
         id_categoria: '',
         stock: '',
+        talla: '',
         imagen: null
     });
 
-    // Función para cargar los datos existentes del producto
+    // Cargar datos existentes del producto
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://localhost:3002/api/products/${productId}`);
-            const product = await response.json();
-            setProductData({
-                nombre: product.nombre,
-                descripcion: product.descripcion,
-                precio: product.precio,
-                id_categoria: product.id_categoria,
-                stock: product.stock,
-                talla: product.talla,
-                imagen: product.imagen // Asumimos que la imagen no se carga inicialmente
-            });
+            try {
+                const response = await fetch(`http://localhost:3002/api/products/${productId}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const product = await response.json();
+                console.log(product)
+                setProductData({
+                    nombre: product.nombre,
+                    descripcion: product.descripcion,
+                    precio: product.precio,
+                    id_categoria: product.id_categoria,
+                    stock: product.stock,
+                    talla: product.talla,
+                    imagen: null  // Las imágenes generalmente se manejan por separado
+                });
+            } catch (error) {
+                console.error('Error fetching product:', error);
+            }
         };
-        fetchData();
+        if (productId) fetchData();
     }, [productId]);
 
     const handleChange = (event) => {
-        const { name, value } = event.target;
-        if (name === "imagen") {
-            setProductData({
-                ...productData,
-                [name]: event.target.files[0]
-            });
-        } else {
-            setProductData({
-                ...productData,
-                [name]: value
-            });
-        }
+        const { name, value, files } = event.target;
+        setProductData((prevState) => ({
+            ...prevState,
+            [name]: name === 'imagen' ? files[0] : value
+        }));
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
-        Object.keys(productData).forEach(key => {
+        Object.keys(productData).forEach((key) => {
             formData.append(key, productData[key]);
         });
 
@@ -60,12 +64,12 @@ function EditProductForm({ productId }) {
             const result = await response.json();
             console.log('Product updated:', result);
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error updating product:', error);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit} className="product-form">
+        <form onSubmit={handleSubmit} className="edit-product-form">
             <label htmlFor="nombre">Nombre:</label>
             <input
                 type="text"
@@ -125,6 +129,7 @@ function EditProductForm({ productId }) {
             <button type="submit">Actualizar Producto</button>
         </form>
     );
-}
+};
 
 export default EditProductForm;
+

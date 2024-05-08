@@ -56,7 +56,8 @@ module.exports = (sequelize, DataTypes) => {
         });
         Producto.hasMany(models.ProductImage, {
             foreignKey: 'productId',
-            as: 'imagenes'
+            as: 'imagenes',
+            onDelete: 'CASCADE' // Asegura que al eliminar un producto, sus imágenes se eliminen automáticamente
         });
     };
 
