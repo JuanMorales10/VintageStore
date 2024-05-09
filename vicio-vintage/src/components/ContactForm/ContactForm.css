@@ -1,25 +1,26 @@
 /* Estilos para el formulario de contacto */
-.contact-form {
+.contact-formm {
     padding: 20px;
     background-color: #fff;
     text-align: center;
 }
 
-.contact-form form {
+.contact-formm form {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px !important;
 }
 
-.contact-form input, .contact-form textarea {
+.contact-formm input, .contact-formm textarea {
     width: 90%; /* Ajusta el ancho según la disposición */
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
 }
 
-.contact-form button {
+.contact-formm button {
     padding: 10px 20px;
     color: #fff;
     background-color: #007bff;
@@ -27,6 +28,6 @@
     cursor: pointer;
 }
 
-.contact-form button:hover {
+.contact-formm button:hover {
     background-color: #0056b3;
 }

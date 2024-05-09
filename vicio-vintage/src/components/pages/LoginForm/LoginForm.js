@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';  // Importa el CSS directamente si no usas CSS Modules
 
+
 const AdminLogin = () => {
     const [email, setEmail] = useState('');
     const [contrasena, setPassword] = useState('');
@@ -18,7 +19,7 @@ const AdminLogin = () => {
         const data = await response.json();
         if (response.ok) {
             localStorage.setItem('token', data.token);
-            navigate('/admin/dashboard');
+            navigate('/');
         } else {
             alert(data.message || 'Invalid credentials');
         }

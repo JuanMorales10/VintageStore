@@ -3,41 +3,6 @@ import { getCart, removeFromCart, updateCart, clearCart } from '../../../utils/c
 import './CartPage.css';
 import NavBar from '../../NavBar/NavBar';
 
-// const CartItem = ({ item, onRemove, onUpdate }) => {
-
-//   console.log(item)
-//     const [quantity, setQuantity] = useState(item.quantity);
-
-//     const handleChange = (e) => {
-//         const newQuantity = parseInt(e.target.value, 10);
-//         setQuantity(newQuantity);
-//         onUpdate(item.id, newQuantity);
-//     };
-
-//     return (
-//         <div className="cart-item">
-//             <div className="cart-item-img">
-//                 {item.imagenes && item.imagenes.length > 0 && (
-//                     <img src={`http://localhost:3002/img/products/${item.imagenes[0].url}`} alt={item.nombre} />
-//                 )}
-//             </div>
-//             <div className="cart-item-info">
-//                 <h3>{item.nombre}</h3>
-//                 <p>Precio: ${item.precio}</p>
-//                 <p>Cantidad:
-//                     <input
-//                         type="number"
-//                         min="1"
-//                         value={quantity}
-//                         onChange={handleChange}
-//                     />
-//                 </p>
-//                 <button onClick={() => onRemove(item.id)}>Remove</button>
-//             </div>
-//         </div>
-//     );
-// };
-
 const CartItem = ({ item, onRemove, onUpdate }) => {
     const [quantity, setQuantity] = useState(item.quantity);
 
@@ -60,9 +25,9 @@ const CartItem = ({ item, onRemove, onUpdate }) => {
                 <div className="quantity">
                     Cantidad:
                     <input type="number" min="1" value={quantity} onChange={handleChange} />
-                </div>
                 <div className="actions">
                     <button onClick={() => onRemove(item.id)} className="remove-btn">Eliminar</button>
+                </div>
                 </div>
             </div>
         </div>
@@ -135,10 +100,12 @@ const CartPage = () => {
             {cart.map((item) => (
                 <CartItem key={item.id} item={item} onRemove={handleRemoveFromCart} onUpdate={handleUpdateCart} />
             ))}
-            <button onClick={handleClearCart}>Vaciar Carrito</button>
-            <button onClick={handleSubmit}>Pagar</button>
         </div>
     )}
+    <div className="total">
+    <button onClick={handleClearCart}>Vaciar Carrito</button>
+    <button onClick={handleSubmit}>Pagar</button>
+        </div>
 </div>
     </>
   );

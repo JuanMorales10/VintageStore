@@ -134,12 +134,15 @@
 import React, { useState, useEffect } from 'react';
 import './ProductForm.css';
 import NavBar from '../../NavBar/NavBar';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function ProductForm() {
     const [categorias, setCategorias] = useState([]);
     const [subcategorias, setSubcategorias] = useState([]);
     const [selectedCategoria, setSelectedCategoria] = useState('');
     const [selectedSubcategoria, setSelectedSubcategoria] = useState('');
+    const navigate = useNavigate();
     const [productData, setProductData] = useState({
         nombre: '',
         descripcion: '',
@@ -218,6 +221,14 @@ function ProductForm() {
             });
             if (!response.ok) throw new Error('Network response was not ok');
             const result = await response.json();
+
+            Swal.fire(
+                'Creado!',
+                'Tu producto fue creado.',
+                'success'
+            );
+            navigate('/admin/dashboard')
+
             console.log('Producto creado:', result);
         } catch (error) {
             console.error('Error al crear el producto:', error);
@@ -226,7 +237,6 @@ function ProductForm() {
 
     return (
         <>
-        <NavBar />
         <form onSubmit={handleSubmit} className='formcreate'>
             <label htmlFor="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" value={productData.nombre} onChange={handleChange} required />

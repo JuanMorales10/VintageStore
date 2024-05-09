@@ -23,6 +23,23 @@
     color: #000000;
 }
 
+.image-preview-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.image-preview{
+    display: flex;
+    flex-direction: column;
+    max-width: 150px;
+}
+
+.editimage{
+    width: 150px;
+    max-height: 150px;
+}
+
 .edit-product-form button {
     padding: 10px 15px;
     color: white;

@@ -1,58 +1,111 @@
 /* Dashboard.css */
 
 /* Estilo general del contenedor del dashboard */
-.dashboard-container {
-    padding: 20px;
+.db-container {
     background-color: #f7f7f7;
     min-height: 100vh;
+    display: flex;
+}
+
+/* Estilo para el sidenav del dashboard */
+.db-sidenav {
+    width: 200px;
+    background-color: #7ac3b0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.db-logosidenav {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+.db-sidenav button {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #000000ac;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.db-sidenav button:hover {
+    background-color: #b0c6adae;
+    color: #000;
+}
+
+/* Estilo del contenido principal */
+.db-content {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #d6d4d4;
+}
+.db-pro{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.h1db{
+    background-color: #7ac3b0;
+    padding: 30px;
+    border-radius: 12px;
+    color: #fff;
 }
 
 /* Estilo para los contenedores de productos */
-.product-container {
+.db-product-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    gap: 20px;  /* Espacio entre las tarjetas */
+    gap: 20px;
 }
 
 /* Estilo de las tarjetas de productos individuales */
-.product-card {
-    width: 300px;
+.db-product-card {
+    width: 250px;
     background: #ffffff;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 20px;
+    height: auto;
 }
 
-/* Estilo para las imágenes de los productos */
-.product-image {
+.db-product-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
 }
 
-/* Estilo para el cuerpo de la tarjeta */
-.card-body {
+.db-card-body {
     padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Títulos dentro de las tarjetas */
-.card-title {
+.db-card-title {
     font-size: 18px;
     color: #333;
     margin-bottom: 10px;
 }
 
-/* Precio del producto en las tarjetas */
-.card-price {
+.db-card-price {
     font-size: 16px;
     color: #666;
     margin-bottom: 15px;
 }
 
-/* Botones para editar y eliminar */
-.edit-button, .delete-button {
+.db-edit-button, .db-delete-button {
     padding: 8px 12px;
     border: none;
     color: white;
@@ -63,19 +116,18 @@
     transition: background-color 0.3s ease;
 }
 
-.edit-button {
-    background-color: #4CAF50;  /* Verde */
+.db-edit-button {
+    background-color: #4CAF50; /* Verde */
 }
 
-.delete-button {
-    background-color: #f44336;  /* Rojo */
+.db-delete-button {
+    background-color: #f44336; /* Rojo */
 }
 
-.edit-button:hover {
-    background-color: #45a049;  /* Verde oscuro */
+.db-edit-button:hover {
+    background-color: #45a049; /* Verde oscuro */
 }
 
-.delete-button:hover {
-    background-color: #d32f2f;  /* Rojo oscuro */
+.db-delete-button:hover {
+    background-color: #d32f2f; /* Rojo oscuro */
 }
-
