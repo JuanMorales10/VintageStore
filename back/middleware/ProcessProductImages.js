@@ -1,5 +1,12 @@
 const multer = require('multer');
 const path = require('path');
+const sharp = require('sharp')
+
+const helperImage = (filePath, filename ,size = 300 ) =>{
+    return sharp(filePath)
+    .resize(size)
+    .toFile(`../public/img/products/${filename}.avif`)
+}
 
 // Configuración del almacenamiento
 const storage = multer.diskStorage({

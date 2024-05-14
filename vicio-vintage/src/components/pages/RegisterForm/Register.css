@@ -22,7 +22,7 @@
   }
   
   /* Ajustes de los inputs de los formularios */
-  input {
+  .formregister input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;

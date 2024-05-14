@@ -3,7 +3,7 @@ import './ContactForm.css'; // Asumiendo que el CSS para ContactForm está en Co
 
 const ContactForm = () => {
   return (
-    <div className="contact-formm">
+    <div className="contact-formm" id="contact-us">
       <h2>Contactanos</h2>
       <form action="https://formspree.io/f/mrgnjngj" method="POST">
         <input type="text" name="name" placeholder="Tu Nombre" required />

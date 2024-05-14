@@ -82,7 +82,7 @@ const ProductDetailPage = () => {
             <span>Size: {product.talla}</span>
           </div>
           <button onClick={handleAddToCart} className="btn btn-primary btn-block btn-large">
-            Add to Cart
+            Añadir al Carrito
           </button>
         </div>
       </div>

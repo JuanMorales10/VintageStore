@@ -1,5 +1,6 @@
 const db = require('../database/models');
 const { validationResult } = require('express-validator');
+const sharp = require('sharp')
 
 const productController = {
     getAllProducts: async (req, res) => {
@@ -32,12 +33,30 @@ const productController = {
             if (!product) {
                 return res.status(404).json({ message: 'Product not found' });
             }
+
+            console.log(product)
             res.json(product);
         } catch (error) {
             console.error('Error al obtener el producto:', error);
             res.status(500).json({ error: 'Error interno del servidor' });
         }
     },
+
+    deleteImage: async (req, res) => {
+        const { imageId } = req.params;
+        try {
+            const image = await db.ProductImage.findByPk(imageId);
+            if (!image) {
+                return res.status(404).json({ message: 'Image not found' });
+            }
+            await image.destroy();
+            res.status(200).json({ message: 'Image deleted successfully' });
+        } catch (error) {
+            console.error('Error deleting image:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    },
+    
     getProductsByCategory : async (req, res) => {
         const { categoriaId } = req.params;
         try {
@@ -63,6 +82,7 @@ const productController = {
             if (products.length === 0) {
                 return res.status(404).json({ message: 'No products found for this category' });
             }
+
     
             const productsWithImages = products.map(product => ({
                 id: product.id_producto,
@@ -71,7 +91,8 @@ const productController = {
                 price: product.precio,
                 stock: product.stock,
                 size: product.talla,
-                images: product.imagenes.map(image => image.url) // Asegura que 'url' sea el campo correcto en tu modelo ProductImage
+                images: product.imagenes.map(image => image.url),
+                id_subcategoria: product.id_subcategoria
             }));
     
             res.json({
@@ -83,9 +104,50 @@ const productController = {
             console.error('Error al obtener productos por categoría:', error);
             res.status(500).json({ error: 'Error interno del servidor' });
         }
-    }    
-    ,
-
+    },
+    getProductsBySubcategory: async (req, res) => {
+        const { categoriaId, subcategoriaId } = req.params;
+    
+        try {
+            const categoria = await db.Categoria.findByPk(categoriaId);
+            if (!categoria) {
+                return res.status(404).json({ message: 'Category not found' });
+            }
+    
+            const products = await db.Producto.findAll({
+                where: {
+                    id_categoria: categoriaId,
+                    id_subcategoria: subcategoriaId
+                },
+                include: [
+                    { model: db.ProductImage, as: 'imagenes' }
+                ]
+            });
+    
+            if (!products.length) {
+                return res.status(404).json({ message: 'No products found in this subcategory' });
+            }
+    
+            const productsWithImages = products.map(product => ({
+                id: product.id_producto,
+                name: product.nombre,
+                description: product.descripcion,
+                price: product.precio,
+                images: product.imagenes.map(image => image.url)
+            }));
+    
+            res.json({
+                categoryName: categoria.nombre,
+                products: productsWithImages
+            });
+        } catch (error) {
+            console.error('Error fetching products by subcategory:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    },
+    
+    
+    
     createProduct: async (req, res) => {
 
         // Extraer datos del cuerpo de la solicitud
@@ -102,7 +164,6 @@ const productController = {
             id_subcategoria: id_subcategoria || null // Si no hay subcategoria, establecer como null
         };
 
-        console.log(productData)
     
         try {
             // Validar que la categoría exista

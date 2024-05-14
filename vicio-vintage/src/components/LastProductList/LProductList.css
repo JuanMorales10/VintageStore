@@ -30,6 +30,8 @@
     justify-content: center;
 }
 
+
+
 .carousel-container {
     padding: 20px 0; /* Ajusta el padding si es necesario */
 }
@@ -40,4 +42,9 @@
 
 .carousel-item-padding-40-px {
     padding-right: 10px; /* Reduce el espacio entre tarjetas si es necesario */
+}
+
+
+@media screen and (max-width: 460px) {
+
 }

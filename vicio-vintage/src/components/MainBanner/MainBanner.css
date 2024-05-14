@@ -92,4 +92,9 @@
     top: 120px;
     left: 70px;
 }
+
+.home_label p{
+    font-size: 12px;
+    margin: 20px;
+}
 }

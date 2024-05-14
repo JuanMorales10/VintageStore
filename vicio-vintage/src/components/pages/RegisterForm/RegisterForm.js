@@ -31,7 +31,7 @@ const RegisterForm = () => {
                 <img src="/path/to/your/logo.png" alt="Home" className="register-logo"/>
             </Link>
             <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='formregister'>
                 <input
                     type="text"
                     name="nombre"

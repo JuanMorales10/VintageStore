@@ -65,7 +65,7 @@ const LProductList = () => {
                     dotListClass="custom-dot-list-style"
                     itemClass="carousel-item-padding-40-px">
                     {products.map((product) => (
-                      <Card key={product.id} {...product} />
+                      <Card key={product.id} {...product} className='procard' />
                     ))}
                 </Carousel>
             ) : (
